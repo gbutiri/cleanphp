@@ -1,0 +1,113 @@
+SetEnv PHP_VER 5
+
+RewriteEngine on
+RewriteBase /
+Options +FollowSymLinks
+AddDefaultCharset UTF-8
+
+# ERROR DOC
+ErrorDocument 404 /404page.php
+
+# CACHING JS CSS
+RewriteRule ^cache.css-(.*\.css) /inc/combine.php?type=css&files=$1
+RewriteRule ^cache.js-(.*\.js) /inc/combine.php?type=js&files=$1
+
+# SITEMAP
+RewriteRule ^sitemap(.*)\.xml/?$ sitemap.php?page=$1 [L]
+
+# ADMIN
+RewriteRule ^admin$ - [L]
+RewriteRule ^admin/(.*) - [L]
+
+# HTML -> PHP files
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)\.htm$ $1.php [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)\.html$ $1.php [NC]
+
+#MODULE REDIRECTION - with site exception
+#RewriteCond %{REQUEST_URI} !^/modules/site/(.*)
+RewriteRule ^tools/(.*)$ modular.php?query=$1 [QSA,L]
+
+# PAGES
+RewriteRule ^about/ about.php
+RewriteRule ^about about.php
+
+# PROFILE
+RewriteRule ^([^/\.]+)?/?$ profile.php?un=$1 [L,QSA]
+RewriteRule ^([^/\.]+)?/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)$ profile.php?un=$1&page=$2&id=$3 [L,QSA]
+RewriteRule ^([^/\.]+)?/([a-zA-Z0-9]+)$ profile.php?un=$1&page=$2 [L,QSA]
+RewriteRule ^([^/\.]+)/view/(.*)$ profile.php?un=$1&type=tab&page=$2
+RewriteRule ^([^/\.]+)/public/(.*)$ profile.php?un=$1&type=public&page=$2
+RewriteRule ^([^/\.]+)/private/(.*)$ profile.php?un=$1&type=private&page=$2 [L,QSA]
+
+# WWW REMOVE
+RewriteCond %{HTTP_HOST} ^www.cleanphp.com$ [NC]
+RewriteRule ^(.*)$ http://cleanphp.com/$1 [L,R=301]
+
+
+# COMPRESSION EXPIRE AND CACHING
+
+# COMPRESSION / GZIP
+# compress text, html, javascript, css, xml:
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+
+AddType application/x-gzip .gz .tgz .gzip
+AddEncoding x-gzip .gz .tgz .gzip
+
+# remove browser bugs
+BrowserMatch ^Mozilla/4 gzip-only-text/html
+BrowserMatch ^Mozilla/4\.0[678] no-gzip
+BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+Header append Vary User-Agent
+
+# ETags
+FileETag MTime Size
+ExpiresActive On
+Header unset Pragma
+FileETag None
+Header unset ETag
+
+# Expire Headers
+
+<ifModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 2592000 seconds"
+  ExpiresByType text/html "access plus 2592000 seconds"
+  ExpiresByType image/gif "access plus 2592000 seconds"
+  ExpiresByType image/jpeg "access plus 2592000 seconds"
+  ExpiresByType image/png "access plus 2592000 seconds"
+  ExpiresByType text/css "access plus 2592000 seconds"
+  ExpiresByType application/x-javascript "access plus 2592000 seconds"
+  ExpiresByType application/javascript "access plus 2592000 seconds"
+  ExpiresByType text/javascript "access plus 2592000 seconds"
+</ifModule>
+
+# file caching
+<ifModule mod_headers.c>
+	<FilesMatch "\\.(js|css|jpg|png|jpeg|gif)$">
+		RequestHeader unset Cookie
+		Header unset Set-Cookie
+		Header set Cache-Control "max-age=864259200000"
+	</FilesMatch>
+  <filesMatch "\\.(css)$">
+    Header set Cache-Control "max-age=864259200000"
+  </filesMatch>
+  <filesMatch "\\.(js)$">
+    Header set Cache-Control "max-age=864259200000"
+  </filesMatch>
+  <filesMatch "\\.(xml|txt)$">
+    Header set Cache-Control "max-age=216000, public, must-revalidate"
+  </filesMatch>
+  <filesMatch "\\.(html|htm|php)$">
+    Header set Cache-Control "max-age=1, private, must-revalidate"
+  </filesMatch>
+</ifModule>

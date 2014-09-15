@@ -1,0 +1,67 @@
+/* reset */
+body, html {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+ul, ol {
+	margin: 0;
+	padding: 0;
+}
+li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+nav li {
+	float: left;
+	margin-left: 10px;
+}
+nav li:first-child {
+	margin-left: 0;
+}
+a {
+	text-decoration: none;
+	color: #4eb2ff;
+}
+
+
+
+/* custom elements */
+.page {
+	clear: both;
+}
+.clear {
+	clear: both;
+}
+.clearfix {
+	height: 1px;
+	line-height: 1px;
+	clear: both;
+	display: block;
+}
+
+
+
+
+
+/* overwrite */
+.fuzz .vbox-close {
+	line-height: 24px;
+}
+
+
+
+
+/* site css - replace this */
+.header {
+	background: #eee;
+}
+nav {
+	width: 1000px;
+	margin: auto;
+}
+.main-content {
+	width: 1000px;
+	margin: auto;
+}
