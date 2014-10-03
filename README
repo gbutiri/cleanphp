@@ -1,12 +1,20 @@
-required apache modules:
+Why am I having multiple steps to install?
+1. These steps only require tu run one time. I don't want to clog up the code base with code that will only run once
+2. One day, I shall have an install file like wordpress. Until then, configure to your heart's content. It's not that hard. Do the work, you lazy bums!
+
+Steps to installation.
+
+1. copy the config sample to config.php and modify accordingly. (DO NOT ADD TO GIT)
+
+2. required apache modules:
 rewrite_module
 expires_module
 headers_module
 filter_module
 
-create database:
-dbname or whatever is in the index file
+3. create database:
+dbname or whatever is in the config file
 
-Create Cache Folder:
+4. Create Cache Folders (DO NOT ADD TO GIT):
 /cache/
 /cache/combine
