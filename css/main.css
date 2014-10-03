@@ -1,5 +1,5 @@
 /* reset */
-body, html {
+body, html, textarea {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	margin: 0;
 	padding: 0;
@@ -85,4 +85,92 @@ nav {
 .main-content {
 	width: 1000px;
 	margin: auto;
+}
+
+
+/* FORM elements */
+.ajaxform * {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.ajaxform h3 {
+    font-weight: normal;
+    font-size: 24px;
+    margin-top: 0;
+}
+.ajaxform .row {
+    margin-bottom: 10px;
+}
+.ajaxform .field-wrapper label {
+    background: #79C7CB;
+    color: #fff;
+    line-height: 10px;
+    padding: 14px 10px;
+    cursor: pointer;
+    width: 100px;
+    display: block;
+    font-size: 14px;
+    float: left;
+}
+.ajaxform input[type="text"], 
+.ajaxform input[type="password"], 
+.ajaxform textarea, 
+.ajaxform select {
+    border: 0;
+    outline: none;
+    color: #000;
+    font-size: 16px;
+    background: #ddd;
+    width: 250px;
+    padding: 9px;
+    padding-left: 20px;
+    line-height: 20px;
+    margin-top: 0;
+    cursor: pointer;
+}
+.ajaxform .checkme,
+.ajaxform .radiome {
+    cursor: pointer;
+    color: #79C7CB;
+    float: left;
+    padding-left: 80px;
+    width: 100px;
+    line-height: 19px;
+}
+.arrow-right {
+    position: relative;
+}
+.arrow-right:after {
+left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(121, 199, 203, 0);
+	border-left-color: #79C7CB;
+	border-width: 10px;
+	margin-top: -10px;
+}
+form input[type="submit"] {
+    border: 0;
+    padding: 10px 20px;
+    outline: none;
+    background-color: #79C7CB;
+    display: block;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 16px;
+    cursor: pointer;
+}
+form input[type="submit"]:hover {
+    background-color: #7ED6DC;
+}
+form input[type="submit"]:active {
+    background-color: #79C7CB;
 }
