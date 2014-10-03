@@ -40,15 +40,15 @@ a {
 	clear: both;
 	display: block;
 }
+.hidden {
+    display: none;
+}
 
 
 
 
 
 /* overwrite */
-.fuzz .vbox-close {
-	line-height: 24px;
-}
 #loading-circle {
     z-index: 1001;
     position: fixed;

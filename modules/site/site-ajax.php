@@ -32,6 +32,24 @@ function sample_modal() {
 	));
 }
 
+function show_form_sample () {
+	include(_DOCROOT.'/modules/site/site-templates.php');
+    ob_start();
+	renderSampleForm();
+    $htmlBack = ob_get_contents();
+    ob_end_clean();
+	echo json_encode(array(
+        'vbox' => $htmlBack,
+	));
+}
+
+function submit_sample_form () {
+	echo json_encode(array(
+        'vals_out' => $_POST,
+        'vboxclose' => true,
+	));
+}
+
 function bad_call() {
 	echo json_encode(array(
 		'success' => false,
