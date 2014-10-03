@@ -58,6 +58,6 @@ These are for the combination of the css and js files. Groupring them into singl
 - sql-core that runs mysqli prepared statements for ease of use
   - example query call:
   - $sql = "SELECT id, fname, lname FROM users WHERE username LIKE ?";
-  - $users = sqlGet( $sql,'s',array( trim( $_POST['username'] ) ) );
+  - $users = sqlGet( $sql, 's', array( trim( $_POST['username'] ) ) );
   - echo "User's first name is: " . $users[0]['fname'];
 - No confusing new languages to learn. Simple.
