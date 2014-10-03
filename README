@@ -18,6 +18,46 @@ filter_module
 3. create database:
 dbname or whatever is in the config file
 
-4. Create Cache Folders (DO NOT ADD TO GIT):
+4. Enable mysqli for databases
+
+5. Create Cache Folders (DO NOT ADD TO GIT):
 /cache/
 /cache/combine
+
+These are for the combination of the css and js files. Groupring them into single http requests is awesome.
+
+<h2>The benefits</h2>
+- less than a second to clone.
+- quick development turnaround time.
+- easy to understand code.
+- funnel control opened wide at both ends.
+- no confusing new languages to learn. Simple.
+
+<h2>The features</h2>
+- ajax controller
+- general functions
+  - getDataURI => convert any image into data-uri
+  - friendlyURL => turn any text into a friendly URL (regex)
+  - birthday => a check that returns the differnce in years for a date (birthday checks)
+  - get_days => a function to get number of days between now and a specified date.
+  - checkEmail => check email format on server side.
+  - checkPassword => check password requirements. Too long, too short, not enough special characters, etc.
+  - checkUsername => similar to checkPassword, but for usernames.
+  - checkValidDate => check to see if the specified date is valid.
+  - createRandomPassword => if you want to generate a random alpha numeric string.
+  - makeUserFolder => in case you have to create some nested folders for your users.
+  - cacheModule => turn an "include" file into an html cached module. Using file caching for exceptions. i.e. A static form on a page.
+  - cacheDynamicModule => same as above, but works with dynamic paths (user profile cached).
+  - burstCache => Clears both of the above stored files.
+  - makeIfNoExist => recursively create a folder if it does not exist. (Kind of like makeUserFolder)
+  - resizeAttachment => resize images based on some parameters. Resizing to fill in and cropping horizontally as well as vertically.
+  - getZipInfo => using google map api to get location information (city state lat long)
+  - getLatLong => same as above (only get lat long). Could be combined I suppose.
+- modular SPA design
+- root folder single pages easy to spot
+- sql-core that runs mysqli prepared statements for ease of use
+  - example query call:
+  - $sql = "SELECT id, fname, lname FROM users WHERE username LIKE ?";
+  - $users = sqlGet( $sql,'s',array( trim( $_POST['username'] ) ) );
+  - echo "User's first name is: " . $users[0]['fname'];
+- No confusing new languages to learn. Simple.

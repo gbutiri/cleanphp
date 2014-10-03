@@ -54,19 +54,6 @@ Class Functions {
 		}
 	}
 	
-	function loggedInTA() {
-		if (isset($_SESSION['actingshowcase_ta_username'])) {
-			if ($_SESSION['actingshowcase_ta_username'] != '') {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-		
-	}
-	
 	function isLoggedInUser($username) {
 		if ($this->loggedIn($username)) {
 			if (_USERNAME == $username) {
@@ -78,23 +65,6 @@ Class Functions {
 			return false;
 		}
 	}
-	
-	function isLinkedFB ($uid) {
-		if ($this->loggedIn()) {
-			$sql="SELECT fbid FROM signup WHERE fbid='".$uid."' AND username = '"._USERNAME."'";
-			$res=mysql_query($sql);
-			$row=mysql_fetch_array($res);
-			$row_count=mysql_num_rows($res);
-			if ($row_count > 0) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
 	
 	function get_days($date_in) {
 		$start_ts = ($date_in);
@@ -183,31 +153,6 @@ Class Functions {
         return $pass;
     }
 	
-	function getUID($username) {
-		$sql="SELECT UID FROM signup WHERE username = '".$username."'";
-		$res=mysql_query($sql);
-		$row=mysql_fetch_array($res);
-		return $row['UID'];
-	}
-	
-	function userFolder($username) {
-		$letterfolder = strtolower(substr($username,0,1));
-		$folder = "users/".$letterfolder."/".$username;
-		return $folder;
-	}
-	
-	function cdpFolder($username) {
-		$letterfolder = strtolower(substr($username,0,1));
-		$folder = "casting/".$letterfolder."/".$username;
-		return $folder;
-	}
-	
-	function getUserFolder($username) {
-		$letterfolder = strtolower(substr($username,0,1));
-		$folder = "users/".$letterfolder."/".$username;
-		return $folder;
-	}
-	
 	function makeUserFolder($username) {
 		if(!is_dir("users")) {
 			mkdir("./users", 0777);
@@ -234,64 +179,6 @@ Class Functions {
 		// MAKE video thumbs DIRECTORY
 		if (!is_dir(_DOCROOT."/users/".$letterfolder."/".$username."/vthumbs")) {
 			mkdir(_DOCROOT."/users/".$letterfolder."/".$username."/vthumbs", 0777);
-		}
-	}
-	
-	function makeCastingFolder($username) {
-		if(!is_dir("casting")) {
-			mkdir("./casting", 0777);
-		}
-	
-		// MAKE FIRST LETTER FOLDERS
-		$letterfolder = strtolower(substr($username,0,1));
-		if (!is_dir("./casting/".$letterfolder)) {
-			mkdir("./casting/".$letterfolder, 0777);
-		}
-		
-		// MAKE THE casting FOLDER IF NOT EXIST
-		if(!is_dir("./casting/".$letterfolder."/".$username) ){
-			mkdir("./casting/".$letterfolder."/".$username, 0777);
-		}
-		// MAKE photo DIRECTORY
-		if (!is_dir("./casting/".$letterfolder."/".$username."/photos")) {
-			mkdir("./casting/".$letterfolder."/".$username."/photos", 0777);
-		}
-		// MAKE video DIRECTORY
-		if (!is_dir("./casting/".$letterfolder."/".$username."/videos")) {
-			mkdir("./casting/".$letterfolder."/".$username."/videos", 0777);
-		}
-		// MAKE video thumbs DIRECTORY
-		if (!is_dir("./casting/".$letterfolder."/".$username."/vthumbs")) {
-			mkdir("./casting/".$letterfolder."/".$username."/vthumbs", 0777);
-		}
-	}
-	
-	function makeTAFolder($username) {
-		if(!is_dir("talentagent")) {
-			mkdir("./talentagent", 0777);
-		}
-	
-		// MAKE FIRST LETTER FOLDERS
-		$letterfolder = strtolower(substr($username,0,1));
-		if (!is_dir("./talentagent/".$letterfolder)) {
-			mkdir("./talentagent/".$letterfolder, 0777);
-		}
-		
-		// MAKE THE talentagent FOLDER IF NOT EXIST
-		if(!is_dir("./talentagent/".$letterfolder."/".$username) ){
-			mkdir("./talentagent/".$letterfolder."/".$username, 0777);
-		}
-		// MAKE photo DIRECTORY
-		if (!is_dir("./talentagent/".$letterfolder."/".$username."/photos")) {
-			mkdir("./talentagent/".$letterfolder."/".$username."/photos", 0777);
-		}
-		// MAKE video DIRECTORY
-		if (!is_dir("./talentagent/".$letterfolder."/".$username."/videos")) {
-			mkdir("./talentagent/".$letterfolder."/".$username."/videos", 0777);
-		}
-		// MAKE video thumbs DIRECTORY
-		if (!is_dir("./talentagent/".$letterfolder."/".$username."/vthumbs")) {
-			mkdir("./talentagent/".$letterfolder."/".$username."/vthumbs", 0777);
 		}
 	}
 	
@@ -435,14 +322,10 @@ Class Functions {
 			$imageSizes = $this->attachmentSizes;
 		}
 		
-		//var_dump($photoFolder);
-		//var_dump('is_dir($photoFolder)',is_dir($photoFolder),$photoFolder);
 		if (is_dir($upload_folder_with_root)) {
-			//$upload_folder_with_file_and_root = $photoFolder.'/orig_'.$photonum.'.jpg';
 			if (is_file($upload_folder_with_file_and_root)) {
 				list($src_w, $src_h) = getimagesize($upload_folder_with_file_and_root);
 				foreach($imageSizes as $imageSize) {
-					//var_dump($photonum,$imageSize,'<br>');
 					$dst_w = $imageSize[1];
 					$dst_h = $imageSize[2];
 					$new_name = $imageSize[0];
@@ -480,7 +363,6 @@ Class Functions {
 					}
 
 					// dst_ variables can be re-set to the post variables passed in.
-					
 					$src_x = 0;
 					$src_y = 0;
 					/* This is from the plugin.
@@ -498,171 +380,6 @@ Class Functions {
 		}
 	}
 
-	function resizeHeadshot($photonum, $sizes = array(),$username = '') {
-		global $config, $dbi;
-		require_once($_SERVER['DOCUMENT_ROOT'].'/config.php');
-		$dbi = new mysqli("127.0.0.1",_DBUSER,_DBPASS,_DBNAME);
-		include(_DOCROOT.'/sql-core.php');
-		$fn = new Functions();
-		
-		if ($username == '') {
-			if (_ISACTOR) {
-				$username = _USERNAME;
-				$userfolder = $fn->userFolder($username);
-			} elseif (_ISCDP) {
-				$username = _USERNAME;
-				$userfolder = $fn->cdpFolder($username);
-			}
-		}
-		//$sql = "SELECT * FROM signup WHERE username = '".$username."'";
-		$siteFolder = _DOCROOT;
-		//var_dump($config);
-		$imageSizes = $sizes;
-		if (count($sizes) == 0) {
-			$imageSizes = $this->imageSizes;
-		}
-		
-		
-		
-		$photoFolder = $siteFolder.'/'.$userfolder.'/photos/';
-		//var_dump($photoFolder);
-		//var_dump('is_dir($photoFolder)',is_dir($photoFolder),$photoFolder);
-		if (is_dir($photoFolder)) {
-			$absPhotoFile = $photoFolder.'/orig_'.$photonum.'.jpg';
-			if (is_file($absPhotoFile)) {
-				list($src_w, $src_h) = getimagesize($absPhotoFile);
-				foreach($imageSizes as $imageSize) {
-					//var_dump($photonum,$imageSize,'<br>');
-					$dst_w = $imageSize[1];
-					$dst_h = $imageSize[2];
-					$new_name = $imageSize[0];
-					$newPhotoFile = $photoFolder.'/'.$new_name.'_'.$photonum.'.jpg';
-					
-					$src_ratio = $src_w / $src_h;
-					$dst_ratio = $dst_w / $dst_h;
-					
-					$dst_image = imagecreatetruecolor($dst_w, $dst_h);
-					$src_image = imagecreatefromjpeg($absPhotoFile);
-					
-					// this is to place the image in the center.
-					$dst_x = 0;
-					$dst_y = 0;
-					if ($src_ratio > $dst_ratio) {
-						$shrinkRatio = $dst_h / $src_h ;
-						$dst_w = $src_w*$shrinkRatio;
-						$diffOffset = (($dst_w-$imageSize[1])/2);
-						$dst_x = -$diffOffset;
-					} elseif ($src_ratio < $dst_ratio) {
-						$shrinkRatio = $dst_w / $src_w ;
-						$dst_h = $src_h*$shrinkRatio;
-						$diffOffset = (($dst_h-$imageSize[2])/2);
-						$dst_y = -$diffOffset;
-					}
-
-					// dst_ variables can be re-set to the post variables passed in.
-					
-					$src_x = 0;
-					$src_y = 0;
-					/* This is from the plugin.
-					imagecopyresampled($dst_r,$img_r,0,0,$_POST['x'],$_POST['y'],$targ_w,$targ_h,$_POST['w'],$_POST['h']);     */
-					if (isset($_POST['x'])) {
-						$src_x=$_POST['x'];
-						$src_y=$_POST['y'];
-						$src_w=$_POST['w'];
-						$src_h=$_POST['h'];
-					}
-					imagecopyresampled($dst_image, $src_image, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
-					imagejpeg($dst_image, $newPhotoFile, 75);
-					
-					
-					
-				}
-				$newPhotoFile = $photoFolder.'/medium_'.$photonum.'.jpg';
-				$data_uri = $this->getDataURI($newPhotoFile);
-				$sql_du = "UPDATE signup SET uri_headshot = ? WHERE username = ?";
-				//var_dump($data_uri,$sql_du,_USERNAME);
-				sqlRun($sql_du,"ss",array($data_uri,_USERNAME));
-			}
-		}
-	}
-
-	function showDuration($seconds) {
-		$minutes = intval($seconds / 60);
-		$remainingSeconds = $seconds % 60;
-		if ($remainingSeconds < 10) {
-			$remainingSeconds = "0".$remainingSeconds;
-		}
-		return $minutes.":".$remainingSeconds;
-	}
-	
-	var $videoSizes = array(
-		array('medium',150,100),
-		array('large',200,130)
-	);
-
-	function resizeVideoThumbs($vid, $sizes = array(),$username = '') {
-		//var_dump($_SERVER['DOCUMENT_ROOT'].'/config.php');
-		require_once($_SERVER['DOCUMENT_ROOT'].'/config.php');
-		global $config;
-		$fn = new Functions();
-		
-		
-		if ($username == '') {
-			$username = _USERNAME;
-		}
-
-		//$sql = "SELECT * FROM signup WHERE username = '".$username."'";
-		$siteFolder = $_SERVER['DOCUMENT_ROOT'].$config['root_folder'];
-		
-		$videoSizes = $sizes;
-		//var_dump($siteFolder);
-		
-		
-		$userfolder = $fn->userFolder($username);
-
-		$photoFolder = $siteFolder.'/'.$userfolder.'/vthumbs/';
-		//var_dump($photoFolder);
-		//var_dump('is_dir($photoFolder)',is_dir($photoFolder),$photoFolder);
-				//var_dump($config);
-		if (is_dir($photoFolder)) {
-			$absPhotoFile = $photoFolder.'/'.$vid.'.jpg';
-			if (is_file($absPhotoFile)) {
-				list($src_w, $src_h) = getimagesize($absPhotoFile);
-				foreach($videoSizes as $imageSize) {
-					//var_dump($vid,$imageSize,'<br>');
-					$dst_w = $imageSize[1];
-					$dst_h = $imageSize[2];
-					$new_name = $imageSize[0];
-					$newPhotoFile = $photoFolder.'/'.$new_name.'_'.$vid.'.jpg';
-					
-					$src_ratio = $src_w / $src_h;
-					$dst_ratio = $dst_w / $dst_h;
-					
-					$dst_image = imagecreatetruecolor($dst_w, $dst_h);
-					$src_image = imagecreatefromjpeg($absPhotoFile);
-					$dst_x = 0;
-					$dst_y = 0;
-					if ($src_ratio > $dst_ratio) {
-						$shrinkRatio = $dst_h / $src_h ;
-						$dst_w = $src_w*$shrinkRatio;
-						$diffOffset = (($dst_w-$imageSize[1])/2);
-						$dst_x = -$diffOffset;
-					} elseif ($src_ratio < $dst_ratio) {
-						$shrinkRatio = $dst_w / $src_w ;
-						$dst_h = $src_h*$shrinkRatio;
-						$diffOffset = (($dst_h-$imageSize[2])/2);
-						$dst_y = -$diffOffset;
-					}
-
-					$src_x = 0;
-					$src_y = 0;
-					imagecopyresampled($dst_image, $src_image, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
-					imagejpeg($dst_image, $newPhotoFile, 75);
-				}
-			}
-		}
-	}
-	
 	function getZipInfo($inZip, $echo = true) {
 		$inZip = urlencode($inZip);
 		$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$inZip."&sensor=true";
@@ -724,36 +441,6 @@ Class Functions {
 		} else {
 			return $output;
 		}
-	}
-	
-	function g_messageSend($arrayIn) {
-		$body = $arrayIn['body'];
-		$receiver = $arrayIn['receiver'];
-		$date = date("Y-m-d H:i:s");
-		
-		$auditionid = isset($_GET['auditionid']) ? intval($_GET['auditionid']) : 0;
-		if ($auditionid == 0){
-			$auditionid = isset($arrayIn['auditionid']) ? $arrayIn['auditionid'] : 0;
-		}
-		
-		$sql = "INSERT INTO pm (
-			`body`,
-			`sender`,
-			`receiver`,
-			`date`,
-			`audition_id`
-		) VALUES (
-			?,?,?,?,?
-		)";
-		// mysql_query($sql);
-		sqlRun($sql,'ssssi',array($body,_USERNAME,$receiver,$date,$auditionid));
-	}
-
-	function getMainPhotoId() {
-		$sql = "SELECT main_photo_id FROM signup WHERE username = '"._USERNAME."'";
-		$res = mysql_query($sql);
-		$row = mysql_fetch_assoc($res);
-		return $row['main_photo_id'];
 	}
 	
 	function getLatLong($location) {
