@@ -2,7 +2,8 @@
 <html>
 <head>
 	<link rel="stylesheet" href="/cache.css-/css/vbox.css,/css/main.css" />
-	
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    
 	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="/cache.js-/js/vbox.js,/js/ajax-controller.js,/js/main.js"></script>
 </head>

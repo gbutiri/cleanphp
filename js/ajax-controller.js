@@ -18,7 +18,7 @@ function postAjax(d) {
 }
 
 $(document).on('doAjaxController',function(e,$this) {
-    
+    $('body').append('<div id="loading-circle"><i class="fa fa-spinner"></i></div>');
     var _data = '';
     var _action = 'bad_call';
     var _module = 'site';
@@ -39,6 +39,7 @@ $(document).on('doAjaxController',function(e,$this) {
         data: _data,
         dataType: 'json',
         success: function(data) {
+            $('#loading-circle').remove();
             if (data.vbox) {$.fn.vbox('open',data.vbox);};
             if (data.vboxclose) {$.fn.vbox('close');};
             postAjax(data);
