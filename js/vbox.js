@@ -1,10 +1,9 @@
 (function($){
 	var g_vboxlevel = 0;
 	$(document).on('click','.vbox-close, .fuzz',function(e) {
-		e.stopPropagation();
 		e.preventDefault();
 		$.fn.vbox('close');
-	}).on('click','.vbox-content',function(e){
+	}).on('click','.vbox',function(e){
 		e.stopPropagation();
 	}).on('keyup',function(e) {
         if (e.keyCode == 27) {
@@ -13,58 +12,27 @@
             }
         }
     });
-	$(window).on('resize',function(){
-		$.fn.vbox('resize');
-	});
-	$.fn.vbox = function (action,options) {
-		var settings = $.extend({
-			ajaxLink: false,
-			content: 'sample',
-			speed: 100
-		},options);
-		
-		
-		var win = $(window);
-		var winH = win.height();
-		var winW = win.width();
-		
-		if (action == 'count') {
-			return g_vboxlevel;
-		}
-		if (action == 'open') {
-			g_vboxlevel++;
-			if (settings.ajaxLink !== false) {
-				$.ajax({
-					url: settings.ajaxLink,
-					type: 'GET',
-					success: function (data) {
-						settings.content = data;
-						$('body').append('<div class="fuzz" id="vbox_'+g_vboxlevel+'"><div class="vbox"><div class="vbox-content"><div class="inner-content">'+settings.content+'<a data-id="'+g_vboxlevel+'" href="#" class="vbox-close">&times;</a></div></div></div></div>');
-						$thisbox = $(document).find('#vbox_'+g_vboxlevel);
-						settings.ajaxLink = false;
-						$thisbox.animate({opacity:1},settings.speed,function(){
-							$.fn.vbox('resize',settings);
-						});
-						$('body').find('.loading_circle').fadeOut(100,function(){$(this).remove()});
-					}
-				});
-			};
-		};
-		if (action == 'close') {
-			$(document).find('#vbox_'+g_vboxlevel).animate({opacity:0},settings.speed,function() {
-				$(this).remove();
-			});
-			g_vboxlevel--;
-		};
-		if (action == 'closeall') {
-			$(document).find('.fuzz').remove();
-			g_vboxlevel = 0;
-		};
-		if (action == 'resize') {
-			$thisbox = $(document).find('#vbox_'+g_vboxlevel);
-			$thisbox.find('.inner-content, .resizable').css({'max-width':(winW - 100) + 'px'});
-			$thisbox.find('.inner-content, .resizable').css({'max-height':(winH - 100) + 'px'});
-		}
-		
-	}
+    $.fn.vbox = function (action,content) {
+        
+        switch (action) {
+            case "open":
+                g_vboxlevel++;
+                $('body').css({'overflow':'hidden'}).append('<div class="fuzz" id="vbox_'+g_vboxlevel+'"><table align="center" class="vbox-table"><tr><td class="vbox-cell"><div class="vbox"><div class="vbox-content">'+content+'</div><a href="#" class="vbox-close">&times;</a></div></td></tr></table></div>');
+                $(document).find('#vbox_'+g_vboxlevel).animate({opacity:1},100,function() {});
+                break;
+            case "close":
+                $(document).find('#vbox_'+g_vboxlevel).animate({opacity:0},100,function() {
+                    g_vboxlevel--;
+                    $(this).remove();
+                    if (g_vboxlevel == 0) {
+                        $('body').css({'overflow':'auto'});
+                    }
+                });
+                break;
+            case "closeall":
+                $('.fuzz').remove();
+                g_vboxlevel = 0;
+                break;
+        }
+    };
 }(jQuery));

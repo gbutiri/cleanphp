@@ -23,7 +23,13 @@ function sample_function() {
 
 function sample_modal() {
 	include(_DOCROOT.'/modules/site/site-templates.php');
+    ob_start();
 	renderSampleModal();
+    $htmlBack = ob_get_contents();
+    ob_end_clean();
+	echo json_encode(array(
+        'vbox' => $htmlBack,
+	));
 }
 
 function bad_call() {

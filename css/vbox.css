@@ -1,58 +1,43 @@
 .fuzz {
-	position: fixed;
-	background: rgba(0,0,0,0.5);
-	width: 100%;
-	height: 100%;
-	display: table;
-	text-align: center;
-	vertical-align: middle;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	opacity: 0;
-	border: 0;
-	padding: 0;
-	z-index: 1000;
+    position: fixed;
+    background: rgba(0,0,0,0.3);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    opacity: 0;
+    overflow: auto;
+}
+.fuzz .vbox-table {
+    height: 100%;
 }
 .fuzz .vbox {
-	display: table-cell;
-	vertical-align: middle;
-	background: transparent;
-	border: 0;
-	position: relative;
-	padding: 0;
-	left: auto;
-	top: auto;
+    background-color: #3A3E3F;
+    padding: 20px;
+    position: relative;
+    color: #fff;
+    box-shadow: 0 0 50px #3A3E3F;
 }
-
 .fuzz .vbox-content {
-	text-align: left;
-	box-shadow: 0 9px 39px #333;
-	display: inline-block;
-	padding: 20px;
-	background: #fff;
-	position: relative;
+    color: #fff;
 }
-.fuzz .inner-content {
-	overflow: auto;
-	border: 1px solid #ccc;
-	padding: 20px;
+.fuzz .vbox-close {
+    position: absolute;
+    color: #3A3E3F;
+    text-decoration: none;
+    right: -6px;
+    top: -6px;
+    border: 5px solid #3A3E3F;
+    border-radius: 20px;
+    width: 30px;
+    text-align: center;
+    font-size: 29px;
+    height: 30px;
+    line-height: 21px;
+    background-color: #fff;
+    font-weight: bold;
 }
-.fuzz .vbox-close{
-	position: absolute;
-	font-size: 28px;
-	text-decoration: none;
-	top: -12px;
-	right: -12px;
-	border: 3px solid #fff;
-	box-shadow: 0 0 10px #000;
-	border-radius: 16px;
-	height: 26px;
-	line-height: 28px;
-	background: #000;
-	color: #fff;
-	width: 26px;
-	font-weight: bold;
-	text-align: center;
+.fuzz .vbox-close:hover {
+    background-color: #ddd;
 }
