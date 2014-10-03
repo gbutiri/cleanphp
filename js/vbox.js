@@ -6,7 +6,13 @@
 		$.fn.vbox('close');
 	}).on('click','.vbox-content',function(e){
 		e.stopPropagation();
-	});
+	}).on('keyup',function(e) {
+        if (e.keyCode == 27) {
+            if (g_vboxlevel > 0) {
+                $.fn.vbox('close');
+            }
+        }
+    });
 	$(window).on('resize',function(){
 		$.fn.vbox('resize');
 	});

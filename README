@@ -1,0 +1,12 @@
+required apache modules:
+rewrite_module
+expires_module
+headers_module
+filter_module
+
+create database:
+dbname or whatever is in the index file
+
+Create Cache Folder:
+/cache/
+/cache/combine

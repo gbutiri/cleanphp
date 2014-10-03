@@ -34,6 +34,7 @@ RewriteRule ^about/ about.php
 RewriteRule ^about about.php
 
 # PROFILE
+RewriteRule ^$ index.php [L,QSA]
 RewriteRule ^([^/\.]+)?/?$ profile.php?un=$1 [L,QSA]
 RewriteRule ^([^/\.]+)?/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)$ profile.php?un=$1&page=$2&id=$3 [L,QSA]
 RewriteRule ^([^/\.]+)?/([a-zA-Z0-9]+)$ profile.php?un=$1&page=$2 [L,QSA]
