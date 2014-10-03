@@ -26,7 +26,7 @@ dbname or whatever is in the config file
 
 These are for the combination of the css and js files. Groupring them into single http requests is awesome.
 
-<h2>The benefits</h2>
+**The benefits**
 - less than a second to clone.
 - quick development turnaround time.
 - easy to understand code.
