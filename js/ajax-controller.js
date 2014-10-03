@@ -18,7 +18,7 @@ function postAjax(d) {
 }
 
 $(document).on('doAjaxController',function(e,$this) {
-    $('body').append('<div id="loading-circle"><i class="fa fa-spinner"></i></div>');
+    $('body').append('<div id="loading-circle"><i class="fa fa-spinner fa-spin"></i></div>');
     var _data = '';
     var _action = 'bad_call';
     var _module = 'site';
