@@ -26,14 +26,14 @@ dbname or whatever is in the config file
 
 These are for the combination of the css and js files. Groupring them into single http requests is awesome.
 
-**The benefits**
+** The benefits **
 - less than a second to clone.
 - quick development turnaround time.
 - easy to understand code.
 - funnel control opened wide at both ends.
 - no confusing new languages to learn. Simple.
 
-<h2>The features</h2>
+** The features **
 - ajax controller
 - general functions
   - getDataURI => convert any image into data-uri
