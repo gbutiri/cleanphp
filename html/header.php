@@ -13,6 +13,7 @@
 		<ul>
 			<li><a href="/">Home</a></li>
 			<li><a href="/about">About</a></li>
+			<li><a href="/tools/home">New Home Module</a></li>
 			<div class="clearfix"></div>
 		</ul>
 	</nav>

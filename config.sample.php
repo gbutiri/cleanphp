@@ -14,4 +14,5 @@ if (isset($_SESSION['site_username']) && $_SESSION['site_username'] != '') {
 } else {
 	define("_USERNAME",null);
 }
+
 ?>

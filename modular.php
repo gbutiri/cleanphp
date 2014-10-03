@@ -8,7 +8,7 @@ $queryBits = explode("/",$query);
 
 $module = isset($queryBits[0]) ? $queryBits[0] : 'home';
 
-include (_DOCROOT.'/modules/'.$module.'/index.php');
+include (_DOCROOT.'/modules/'.$module.'/'.$module.'-index.php');
 ?>
 
 <?php include(_DOCROOT.'/html/footer.php'); ?>
