@@ -25,9 +25,10 @@ $(document).on('doAjaxController',function(e,$this) {
     if (typeof($this.attr('data-data')) !== 'undefined') {_data = $this.attr('data-data');}
     if (typeof($this.attr('data-action')) !== 'undefined') {_action = $this.attr('data-action');}
     if (typeof($this.attr('data-module')) !== 'undefined') {_module = $this.attr('data-module');}
-
+    
     if ($this.hasClass('ajaxform')) {
         _data = $this.serialize();
+        $this.find('.err').html('');
     } else {
         _data = $this.attr('data-data') ? $this.attr('data-data') : '';
     };

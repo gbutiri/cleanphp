@@ -44,9 +44,33 @@ function show_form_sample () {
 }
 
 function submit_sample_form () {
+    
+    // check for errors: example.
+    $htmlsErr = array();
+    if (!isset($_POST['agree'])) {
+        $htmlsErr['#agree_err'] = 'You need to agree to the terms before we can continue!';
+    }
+    
+    if (count($htmlsErr) == 0) {
+        echo json_encode(array(
+            'vals_out' => $_POST,
+            'vboxclose' => true,
+        ));
+    } else {
+        echo json_encode(array(
+            'htmls' => $htmlsErr,
+        ));
+    }
+}
+
+function show_register () {
+	include(_DOCROOT.'/modules/site/site-templates.php');
+    ob_start();
+	renderRegisterForm();
+    $htmlBack = ob_get_contents();
+    ob_end_clean();
 	echo json_encode(array(
-        'vals_out' => $_POST,
-        'vboxclose' => true,
+        'vbox' => $htmlBack,
 	));
 }
 

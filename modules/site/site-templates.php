@@ -12,6 +12,48 @@ function renderSampleContent() {
     <?php
 }
 
+function renderRegisterForm() {
+    ?>
+    <form class="ajaxform" data-action="process_login">
+        <h3>Register</h3>
+        <div class="row">
+            <div class="field-wrapper">
+                <label class="arrow-right">Email</label>
+                <input type="text" placeholder="email" name="email" />
+                <div class="err" id="email_err"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="field-wrapper">
+                <label class="arrow-right">Username</label>
+                <input type="text" placeholder="username" name="username" />
+                <div class="err" id="username_err"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="field-wrapper">
+                <label class="arrow-right">Password</label>
+                <input type="password" placeholder="password" name="password" />
+                <div class="err" id="password_err"></div>
+            </div>
+        </div>
+        <p>Would you like us to remember you next time?</p>
+        <div class="row">
+            <div class="checkbox">
+                <input type="checkbox" name="rememberme" value="true" class="hidden" />
+                <i class="fa checkme fa-square-o" data-name="rememberme"></i>
+                <label>Remember me!</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="">
+                <input type="submit" value="Do Action" />
+            </div>
+        </div>
+    </form>
+    <?php
+}
+
 function renderLoginForm() {
     ?>
     <form class="ajaxform" data-action="process_login">
@@ -20,12 +62,14 @@ function renderLoginForm() {
             <div class="field-wrapper">
                 <label class="arrow-right">Username</label>
                 <input type="text" placeholder="text field sample" name="textfield" />
+                <div class="err" id="username_err"></div>
             </div>
         </div>
         <div class="row">
             <div class="field-wrapper">
                 <label class="arrow-right">Password</label>
                 <input type="password" placeholder="password" name="password" />
+                <div class="err" id="password_err"></div>
             </div>
         </div>
         <p>Would you like us to remember you next time?</p>
@@ -54,18 +98,21 @@ function renderSampleForm() {
             <div class="field-wrapper">
                 <label class="arrow-right">Username</label>
                 <input type="text" placeholder="text field sample" name="textfield" />
+                <div class="err" id="username_err"></div>
             </div>
         </div>
         <div class="row">
             <div class="field-wrapper">
                 <label class="arrow-right">Password</label>
                 <input type="password" placeholder="password" name="password" />
+                <div class="err" id="password_err"></div>
             </div>
         </div>
         <div class="row">
             <div class="field-wrapper">
                 <label class="arrow-right">Description</label>
                 <textarea placeholder="description" name="description"></textarea>
+                <div class="err" id="description_err"></div>
             </div>
         </div>
         <div class="row">
@@ -77,6 +124,7 @@ function renderSampleForm() {
                     <option value="2">Blue Hint</option>
                     <option value="3">Sky is falling</option>
                 </select>
+                <div class="err" id="selectone_err"></div>
             </div>
         </div>
         <p>Do you like... </p>
@@ -96,6 +144,7 @@ function renderSampleForm() {
                 <i class="fa checkme fa-square-o" data-name="likes['singing']"></i>
                 <label>Singing?</label>
             </div>
+            <div class="err" id="likes_err"></div>
         </div>
         <p>Are you awesome?</p>
         <div class="row">
@@ -114,6 +163,16 @@ function renderSampleForm() {
                 <i class="fa radiome fa-circle-o" data-name="radio_awesome"></i>
                 <label>Maybe</label>
             </div>
+            <div class="err" id="radio_awesome_err"></div>
+        </div>
+        <p>Terms and conditions. <a href="#">Click to read.</a></p>
+        <div class="row">
+            <div class="checkbox">
+                <input type="checkbox" name="agree" value="true" class="hidden" />
+                <i class="fa checkme fa-square-o" data-name="agree"></i>
+                <label>I have read them and agree!</label>
+                <div class="err" id="agree_err"></div>
+            </div>
         </div>
         <p>Would you like us to remember you next time?</p>
         <div class="row">
@@ -121,6 +180,7 @@ function renderSampleForm() {
                 <input type="checkbox" name="rememberme" value="true" class="hidden" />
                 <i class="fa checkme fa-square-o" data-name="rememberme"></i>
                 <label>Remember me!</label>
+                <div class="err" id="rememberme_err"></div>
             </div>
         </div>
         <div class="row">
