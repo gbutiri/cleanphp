@@ -59,13 +59,14 @@ function install() {
     );";
     
     sqlRun($sql,'',array());
+    unlink(_DOCROOT.'/install.php');
     
 	echo json_encode(array(
         'message' => 'good',
         'sql' => $sql,
         'options' => $_POST['options'],
+        'redirect' =>  '/',
 	));
-    unlink(_DOCROOT.'/install.php');
 }
 
 function sample_modal() {
