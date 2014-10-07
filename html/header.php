@@ -5,6 +5,7 @@
     $more_css = '';
     $more_js = '';
     if (strrpos($_SERVER['SCRIPT_FILENAME'],'/modular.php') !== false) {
+        // module was built in the modular.php file.
         $more_css .= ',/modules/'.$module.'/'.$module.'-main.css';
         $more_js .= ',/modules/'.$module.'/'.$module.'-main.js';
     }
