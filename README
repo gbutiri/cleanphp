@@ -1,5 +1,5 @@
 Why am I having multiple steps to install?
-1. These steps only require tu run one time. I don't want to clog up the code base with code that will only run once
+1. These steps only require to run one time. I don't want to clog up the code base with code that will only run once
 2. One day, I shall have an install file like wordpress. Until then, configure to your heart's content. It's not that hard. Do the work, you lazy bums!
 
 Pre Settings:
