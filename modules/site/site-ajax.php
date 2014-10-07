@@ -50,6 +50,23 @@ function submit_sample_form () {
 	));
 }
 
+function show_login () {
+	include(_DOCROOT.'/modules/site/site-templates.php');
+    ob_start();
+	renderLoginForm();
+    $htmlBack = ob_get_contents();
+    ob_end_clean();
+	echo json_encode(array(
+        'vbox' => $htmlBack,
+	));
+}
+function process_login () {
+	echo json_encode(array(
+        'closevbox' => true,
+        'redirect' => '/gbutiri'
+	));
+}
+
 function bad_call() {
 	echo json_encode(array(
 		'success' => false,

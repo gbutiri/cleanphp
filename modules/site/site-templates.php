@@ -12,6 +12,39 @@ function renderSampleContent() {
     <?php
 }
 
+function renderLoginForm() {
+    ?>
+    <form class="ajaxform" data-action="process_login">
+        <h3>Login</h3>
+        <div class="row">
+            <div class="field-wrapper">
+                <label class="arrow-right">Username</label>
+                <input type="text" placeholder="text field sample" name="textfield" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="field-wrapper">
+                <label class="arrow-right">Password</label>
+                <input type="password" placeholder="password" name="password" />
+            </div>
+        </div>
+        <p>Would you like us to remember you next time?</p>
+        <div class="row">
+            <div class="checkbox">
+                <input type="checkbox" name="rememberme" value="true" class="hidden" />
+                <i class="fa checkme fa-square-o" data-name="rememberme"></i>
+                <label>Remember me!</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="">
+                <input type="submit" value="Do Action" />
+            </div>
+        </div>
+    </form>
+    <?php
+}
+
 function renderSampleForm() {
     ?>
     <form class="ajaxform" data-action="submit_sample_form">
