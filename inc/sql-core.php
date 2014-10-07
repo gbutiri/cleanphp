@@ -16,16 +16,18 @@ function sqlGet ($sql, $types = "", $params = array(), $debug = false, $getData 
 		return array();
 	}
 	global $dbi;
-	$stmt = $dbi->prepare($sql);
 	
-	if ($stmt === false) {
+    $stmt = $dbi->prepare($sql);
+	
+	if (false === $stmt) {
 		var_dump(array(
+            "errno" => $dbi->errno, 
+            "error" => $dbi->error,
 			"sql-error" => true,
 			"sql" => $sql,
 			"params" => $params
 		));
 		echo $sql;
-		exit(0);
 	}
 	
 	if ($types !== "" && count($params) > 0) {

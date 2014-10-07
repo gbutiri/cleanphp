@@ -1,8 +1,8 @@
 <?php 
 include($_SERVER['DOCUMENT_ROOT'].'/config.php'); /* Site Configuration */ 
-include($_SERVER['DOCUMENT_ROOT'].'/inc/sql-core.php'); /* Database stuff */
-include($_SERVER['DOCUMENT_ROOT'].'/html/pre-header.php'); /* Pre Processing (logins, logouts, etc) */
-include($_SERVER['DOCUMENT_ROOT'].'/html/header.php'); /* page header <head> <html> */
+include(_DOCROOT.'/inc/sql-core.php'); /* Database stuff */
+include(_DOCROOT.'/html/pre-header.php'); /* Pre Processing (logins, logouts, etc) */
+include(_DOCROOT.'/html/header.php'); /* page header <head> <html> */
 ?>
 
 <h2>Home</h2>
@@ -16,4 +16,4 @@ include($_SERVER['DOCUMENT_ROOT'].'/html/header.php'); /* page header <head> <ht
 <h2>These are things</h2>
 <p id="stuff-coming-back"></p>
 
-<?php include($_SERVER['DOCUMENT_ROOT'].'/html/footer.php'); ?>
+<?php include(_DOCROOT.'/html/footer.php'); ?>

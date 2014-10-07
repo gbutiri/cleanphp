@@ -1,4 +1,5 @@
-<?php include($_SERVER['DOCUMENT_ROOT'].'/config.php'); /* Site Configuration */
+<?php 
+include($_SERVER['DOCUMENT_ROOT'].'/config.php'); /* Site Configuration */
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'bad_call';
 if(function_exists($action)){call_user_func($action);}else{echo $action . " does not exist.";exit(0);}
@@ -18,6 +19,36 @@ function sample_function() {
         'htmls' => array(
             '#stuff-coming-back' => $htmlBack,
         ),
+	));
+}
+
+function install() {
+    global $dbi;
+    include(_DOCROOT.'/inc/sql-core.php');
+    include(_DOCROOT.'/html/pre-header.php');
+    
+    $sql = "CREATE TABLE IF NOT EXISTS signup (
+        `id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        `email` VARCHAR(255),
+        `username` VARCHAR(20),
+        `password` VARCHAR(255),
+        `token` VARCHAR(255),
+        `salt` VARCHAR(255),
+        `fname` VARCHAR(40),
+        `lname` VARCHAR(40),
+        `bday` TIMESTAMP,
+        `created` INT,
+        `lastloggedin` INT
+    );";
+    
+    sqlRun($sql,'',array());
+    
+    $sql = "SELECT * FROM signup WHERE id = 1;";
+    $user = sqlGet($sql,'',array());
+    
+	echo json_encode(array(
+        'message' => 'good',
+        'user' => $user,
 	));
 }
 
