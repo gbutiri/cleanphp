@@ -5,7 +5,6 @@
     $more_css = '';
     $more_js = '';
     if (strrpos($_SERVER['SCRIPT_FILENAME'],'/modular.php') !== false) {
-        var_dump($_SERVER['SCRIPT_FILENAME'],$module);
         $more_css .= ',/modules/'.$module.'/'.$module.'-main.css';
         $more_js .= ',/modules/'.$module.'/'.$module.'-main.js';
     }
