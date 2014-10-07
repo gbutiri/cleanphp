@@ -121,6 +121,19 @@ function show_register () {
         'vbox' => $htmlBack,
 	));
 }
+function process_registration () {
+    // check value fields.
+    // create user folder.
+    // create salt / tokens.
+    // insert into database.
+    // send out email.
+    // display success message (check email, enter verification code).
+    
+	echo json_encode(array(
+        'closevbox' => true,
+        'redirect' => '/gbutiri'
+	));
+}
 
 function show_login () {
 	include(_DOCROOT.'/modules/site/site-templates.php');

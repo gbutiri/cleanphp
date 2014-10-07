@@ -14,7 +14,7 @@ function renderSampleContent() {
 
 function renderRegisterForm() {
     ?>
-    <form class="ajaxform" data-action="process_login">
+    <form class="ajaxform" data-action="process_registration">
         <h3>Register</h3>
         <div class="row">
             <div class="field-wrapper">
