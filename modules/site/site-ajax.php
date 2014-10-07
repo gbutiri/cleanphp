@@ -27,29 +27,45 @@ function install() {
     include(_DOCROOT.'/inc/sql-core.php');
     include(_DOCROOT.'/html/pre-header.php');
     
+    $sql_ue = '';
+    
+    foreach ($_POST as $key => $posted_item) {
+        if ($key == 'username_email') {
+            $ue = explode('_',$posted_item);
+            foreach ($ue as $uei) {
+                $sql_ue .= " `".$uei."` VARCHAR(255), ";
+            }
+        }
+    }
+    
+    $sql_chk = array();
+    if (isset($_POST['options'])) {
+        foreach ($_POST['options'] as $key => $option) {
+            //var_dump($key, $option);
+            $parts = explode("|",$key);
+            $parts2 = explode("_",$parts[0]);
+            foreach ($parts2 as $part2) {
+                $sql_chk[] = "`" . $part2 . "` " . $parts[1];
+            }
+        }
+    }
+    $sql_chk_string = implode(",",$sql_chk);
+    
     $sql = "CREATE TABLE IF NOT EXISTS signup (
         `id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        `email` VARCHAR(255),
-        `username` VARCHAR(20),
+        ".$sql_ue."
         `password` VARCHAR(255),
-        `token` VARCHAR(255),
-        `salt` VARCHAR(255),
-        `fname` VARCHAR(40),
-        `lname` VARCHAR(40),
-        `bday` TIMESTAMP,
-        `created` INT,
-        `lastloggedin` INT
+        ".$sql_chk_string."
     );";
     
     sqlRun($sql,'',array());
     
-    $sql = "SELECT * FROM signup WHERE id = 1;";
-    $user = sqlGet($sql,'',array());
-    
 	echo json_encode(array(
         'message' => 'good',
-        'user' => $user,
+        'sql' => $sql,
+        'options' => $_POST['options'],
 	));
+    unlink(_DOCROOT.'/install.php');
 }
 
 function sample_modal() {
