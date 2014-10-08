@@ -19,21 +19,27 @@
 
 <body>
 <div class="header">
-	<nav>
-		<ul>
-			<li><a href="/">Home</a></li>
-			<li><a href="/about">About</a></li>
-			<li><a href="/tools/home">New Home Module</a></li>
-            
-            <?php if (_USERNAME == '') { ?>
-			<li><a class="tmbtn" data-action="show_login" href="#">Login</a></li>
-			<li><a class="tmbtn" data-action="show_register" data-loadmsg="Loading Registration Form" href="#">Register</a></li>
-            <?php } else { ?>
-			<li><a class="tmbtn" data-action="logout" href="#">Logout</a></li>
-			<li><a href="/<?php echo _USERNAME; ?>">My Profile</a></li>
-            <?php } ?>
-			<div class="clearfix"></div>
-		</ul>
+    <?php 
+    //var_dump($_SERVER['SCRIPT_FILENAME']);
+    $strpos_slash = strrpos($_SERVER['SCRIPT_FILENAME'],"/");
+    $strpos_dot = strrpos($_SERVER['SCRIPT_FILENAME'],".");
+    $length = $strpos_dot - $strpos_slash;
+    $class = substr($_SERVER['SCRIPT_FILENAME'],$strpos_slash+1,$length-1);
+    //var_dump($class);
+    ?>
+	<nav class="<?php echo $class; ?>">
+		<a class="index" href="/">Home</a>
+        <a class="about" href="/about">About</a>
+        <a class="modular" href="/tools/home">New Home Module</a>
+        
+        <?php if (_USERNAME == '') { ?>
+        <a class="tmbtn" data-action="show_login" href="#">Login</a>
+        <a class="tmbtn" data-action="show_register" data-loadmsg="Loading Registration Form" href="#">Register</a>
+        <?php } else { ?>
+        <a class="tmbtn" data-action="logout" href="#">Logout</a>
+        <a href="/<?php echo _USERNAME; ?>">My Profile</a>
+        <?php } ?>
+        <div class="clearfix"></div>
 	</nav>
 </div>
 <div class="page">

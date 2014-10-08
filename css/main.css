@@ -20,18 +20,46 @@ li {
 	margin: 0;
 	padding: 0;
 }
-nav li {
-	float: left;
-	margin-left: 10px;
+.header {
+    background-color: #2E3134;
 }
-nav li:first-child {
+nav {
+    background-color: #2E3134;
+    margin-bottom: 20px;
+	width: 1000px;
+	margin: auto;
+}
+nav a {
+    display: block;
+	float: left;
+    margin-bottom: -1px;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 3px solid #2E3134;
+}
+nav a.active {
+    background-color: #2E3134;
+    border-bottom: 3px solid #61FF4C;
+}
+nav a:hover {
+    background-color: #3F4144;
+    border-bottom: 3px solid #61FF4C;
+}
+nav a:first-child {
 	margin-left: 0;
 }
 a {
 	text-decoration: none;
 	color: #4eb2ff;
 }
-
+nav.index .index,
+nav.about .about,
+nav.modular .modular
+ {
+    background-color: #2E3134;
+    border-bottom: 3px solid #61FF4C;
+}
 
 
 /* custom elements */
@@ -127,13 +155,6 @@ a {
 
 
 /* site css - replace this */
-.header {
-	background: #eee;
-}
-nav {
-	width: 1000px;
-	margin: auto;
-}
 .main-content {
 	width: 1000px;
 	margin: auto;
