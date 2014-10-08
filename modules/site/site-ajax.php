@@ -123,87 +123,117 @@ function show_register () {
 function process_registration () {
     // used for testing
     //sleep(1);
+    
+    $username = strtolower(trim($_POST['username']));
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+    
     include(_DOCROOT.'/inc/sql-core.php');
     include(_DOCROOT.'/html/pre-header.php');
 	include(_DOCROOT.'/inc/functions.class.php');
+	include(_DOCROOT.'/modules/site/site-data.php');
     $fn = new Functions();
     
     $err = false;
     
     // 1. check value fields.
-    $email_check = $fn->checkEmail($_POST['email']);
+    $email_check = $fn->checkEmail($email);
     if ($email_check === false) {
         $err = true;
         $htmls['#email_err'] = 'Invalid format. Use something similar to username@domain.com';
     }
     
-    $un_check = $fn->checkUsername($_POST['username']);
+    $un_check = $fn->checkUsername($username);
     if ($un_check != "") {
         $err = true;
         $htmls['#username_err'] = $un_check;
     }
     
-    $pw_check = $fn->checkUsername($_POST['password']);
+    $pw_check = $fn->checkUsername($password);
     if ($pw_check != "") {
         $err = true;
         $htmls['#password_err'] = $pw_check;
     }
     
-    // 2. create user folder.
+    $existingUser = getUserByUsername($username);
+    if (count($existingUser) > 0) {
+        $err = true;
+        $htmls['#username_err'] = "Username already exists. Try a different name.";
+    }
     
+    $existingUser = getUserByEmail($email);
+    if (count($existingUser) > 0) {
+        $err = true;
+        $htmls['#email_err'] = "This email is already registered. Try a different one.";
+    }
     
-    // 3. create salt / tokens.
-    $salt = md5($_POST['username'].time());
-    $token = md5($_POST['email'].$salt);
-    
-    // 4. insert into database.
-    $sql_u = "INSERT INTO signup (
-            email,
-            username,
-            `password`,
-            token,
-            salt,
-            fname,
-            lname,
-            bday,
-            created,
-            lastloggedin
-        ) VALUES (
-            ?,?,?,?,?,?,?,?,?,?
-        )";
-    sqlRun($sql_u,'ssssssssii',array(
-        trim($_POST['email']),
-        trim($_POST['username']),
-        md5(trim($_POST['password'])),
-        $token,
-        $salt,
-        "",
-        "",
-        "",
-        time(),
-        time()
-    ));
-    
-    // 5. send out email.
-    $to      = trim($_POST['email']);
-    $subject = "Your Website Registration";
-    $message = "Click this link to validate your email. Or, copy / paste this code";
-    $headers = 'From: webmaster@mypersonalwebsite.com' . "\r\n" .
-        'Reply-To: webmaster@mypersonalwebsite.com' . "\r\n" .
-        'X-Mailer: PHP/' . phpversion();
-    //mail($to, $subject, $message, $headers);
     
     if ($err) {
         echo json_encode(array(
             'htmls' => $htmls,
         ));
     } else {
-        // 6. display success message (check email or check email and enter verification code).
         
+        // 2. create user folder.
+        $fn->makeUserFolder(strtolower($username));
+        
+        // 3. create salt / tokens.
+        $salt = md5($username.time());
+        $token = md5($email.$salt);
+        
+        // 4. insert into database.
+        $sql_u = "INSERT INTO signup (
+                email,
+                username,
+                `password`,
+                token,
+                salt,
+                fname,
+                lname,
+                bday,
+                created,
+                lastloggedin
+            ) VALUES (
+                ?,?,?,?,?,?,?,?,?,?
+            )";
+        sqlRun($sql_u,'ssssssssii',array(
+            $email,
+            $username,
+            md5($password),
+            $token,
+            $salt,
+            "",
+            "",
+            "",
+            time(),
+            time()
+        ));
+        
+        // 5. send out email.
+        $to      = $email;
+        $subject = "Your Website Registration";
+        $message = "Click this link to validate your email. Or, copy / paste this code";
+        $headers = 'From: webmaster@mypersonalwebsite.com' . "\r\n" .
+            'Reply-To: webmaster@mypersonalwebsite.com' . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+        //mail($to, $subject, $message, $headers);
+        
+        // 6. Set session variables.
+        $_SESSION['site_user_username'] = $username;
+        $_SESSION['site_user_salt'] = $salt;
+        $_SESSION['site_user_token'] = $token;
+
+        // 7. display success message (check email or check email and enter verification code).
         echo json_encode(array(
             'closevbox' => true,
-            'redirect' => '/gbutiri'
+            'redirect' => $username
         ));
+        /*
+        echo json_encode(array(
+            'closevbox' => true,
+            'redirect' => strtolower(trim($_POST['username']))
+        ));
+        */
     }
 }
 
@@ -218,10 +248,52 @@ function show_login () {
 	));
 }
 function process_login () {
-	echo json_encode(array(
-        'closevbox' => true,
-        'redirect' => '/gbutiri'
-	));
+    
+    $username = strtolower(trim($_POST['username']));
+    $password = trim($_POST['password']);
+    
+    include(_DOCROOT.'/inc/sql-core.php');
+    include(_DOCROOT.'/html/pre-header.php');
+	include(_DOCROOT.'/inc/functions.class.php');
+	include(_DOCROOT.'/modules/site/site-data.php');
+    
+    $fn = new Functions();
+    
+    $err = false;
+    
+    // 1. check value fields.
+    $existingUser = getUserByUsernameOrEmailAndPassword($username, $password);
+    if (count($existingUser) == 0) {
+        $err = true;
+        $htmls['#username_err'] = "Username or email and password incorrect";
+    } else {
+        $existingUser = $existingUser[0];
+    }
+    
+    if ($err) {
+        echo json_encode(array(
+            'htmls' => $htmls,
+        ));
+    } else {
+        $salt = md5($username.time());
+        $token = md5($existingUser['email'].$salt);
+        
+        $_SESSION['site_user_username'] = $username;
+        $_SESSION['site_user_salt'] = $salt;
+        $_SESSION['site_user_token'] = $token;
+        
+        echo json_encode(array(
+            'closevbox' => true,
+            'redirect' => '/'.$username
+        ));
+    }
+}
+
+function logout() {
+    session_destroy();
+    echo json_encode(array(
+        'redirect' => '/'
+    ));
 }
 
 function bad_call() {

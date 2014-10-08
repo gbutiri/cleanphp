@@ -24,8 +24,13 @@
 			<li><a href="/">Home</a></li>
 			<li><a href="/about">About</a></li>
 			<li><a href="/tools/home">New Home Module</a></li>
+            
+            <?php if (_USERNAME == '') { ?>
 			<li><a class="tmbtn" data-action="show_login" href="#">Login</a></li>
 			<li><a class="tmbtn" data-action="show_register" data-loadmsg="Loading Registration Form" href="#">Register</a></li>
+            <?php } else { ?>
+			<li><a class="tmbtn" data-action="logout" href="#">Logout</a></li>
+            <?php } ?>
 			<div class="clearfix"></div>
 		</ul>
 	</nav>

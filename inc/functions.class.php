@@ -154,14 +154,14 @@ Class Functions {
     }
 	
 	function makeUserFolder($username) {
-		if(!is_dir("users")) {
-			mkdir("./users", 0777);
+		if(!is_dir(_DOCROOT."/users")) {
+			mkdir(_DOCROOT."/users", 0777);
 		}
 	
 		// MAKE FIRST LETTER FOLDERS
 		$letterfolder = strtolower(substr($username,0,1));
-		if (!is_dir("./users/".$letterfolder)) {
-			mkdir("./users/".$letterfolder, 0777);
+		if (!is_dir(_DOCROOT."/users/".$letterfolder)) {
+			mkdir(_DOCROOT."/users/".$letterfolder, 0777);
 		}
 		
 		// MAKE THE users FOLDER IF NOT EXIST

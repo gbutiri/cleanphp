@@ -5,4 +5,6 @@
 
 <h2>Profile: <?php echo $_GET['un'];?></h2>
 
+<p>You are logged in as <?php echo _USERNAME; ?></p>
+
 <?php include($_SERVER['DOCUMENT_ROOT'].'/html/footer.php'); ?>
