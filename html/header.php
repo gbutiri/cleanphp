@@ -36,8 +36,8 @@
         <a class="tmbtn" data-action="show_login" href="#">Login</a>
         <a class="tmbtn" data-action="show_register" data-loadmsg="Loading Registration Form" href="#">Register</a>
         <?php } else { ?>
+        <a class="profile" href="/<?php echo _USERNAME; ?>">My Profile</a>
         <a class="tmbtn" data-action="logout" href="#">Logout</a>
-        <a href="/<?php echo _USERNAME; ?>">My Profile</a>
         <?php } ?>
         <div class="clearfix"></div>
 	</nav>

@@ -282,6 +282,13 @@ function process_login () {
         $_SESSION['site_user_salt'] = $salt;
         $_SESSION['site_user_token'] = $token;
         
+        if (isset($_POST['rememberme']) && $_POST['rememberme'] == 'true') {
+            setcookie('site_user_username', $_SESSION['site_user_username'],(10*365*24*60*60),'/') ;
+            setcookie('site_user_salt', $_SESSION['site_user_salt'],(10*365*24*60*60),'/') ;
+            setcookie('site_user_token', $_SESSION['site_user_token'],(10*365*24*60*60),'/') ;
+        }
+        
+        // exit(0);
         echo json_encode(array(
             'closevbox' => true,
             'redirect' => '/'.$username

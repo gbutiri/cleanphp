@@ -73,7 +73,7 @@ function renderLoginForm() {
         </div>
         <div class="row">
             <div class="">
-                <input type="submit" value="Do Action" />
+                <input type="submit" value="Login" />
             </div>
         </div>
     </form>
