@@ -14,25 +14,25 @@ function renderSampleContent() {
 
 function renderRegisterForm() {
     ?>
-    <form class="ajaxform" data-action="process_registration" data-loadmsg="Signing you up... Please wait.">
+    <form class="ajaxform w285" data-action="process_registration" data-loadmsg="Signing you up... Please wait.">
         <h3>Register</h3>
         <div class="row">
             <div class="field-wrapper">
-                <label class="arrow-right">Email</label>
+                <label class="arrow-right"><i class="fa fa-envelope"></i></label>
                 <input type="text" placeholder="email" name="email" />
                 <div class="err" id="email_err"></div>
             </div>
         </div>
         <div class="row">
             <div class="field-wrapper">
-                <label class="arrow-right">Username</label>
+                <label class="arrow-right"><i class="fa fa-user"></i></label>
                 <input type="text" placeholder="username" name="username" />
                 <div class="err" id="username_err"></div>
             </div>
         </div>
         <div class="row">
             <div class="field-wrapper">
-                <label class="arrow-right">Password</label>
+                <label class="arrow-right"><i class="fa fa-lock"></i></label>
                 <input type="password" placeholder="password" name="password" />
                 <div class="err" id="password_err"></div>
             </div>
@@ -48,23 +48,22 @@ function renderRegisterForm() {
 
 function renderLoginForm() {
     ?>
-    <form class="ajaxform" data-action="process_login">
+    <form class="ajaxform w285" data-action="process_login">
         <h3>Login</h3>
         <div class="row">
             <div class="field-wrapper">
-                <label class="arrow-right">Username</label>
-                <input type="text" placeholder="text field sample" name="textfield" />
+                <label class="arrow-right"><i class="fa fa-user"></i></label>
+                <input type="text" placeholder="username" name="username" />
                 <div class="err" id="username_err"></div>
             </div>
         </div>
         <div class="row">
             <div class="field-wrapper">
-                <label class="arrow-right">Password</label>
+                <label class="arrow-right"><i class="fa fa-lock"></i></label>
                 <input type="password" placeholder="password" name="password" />
                 <div class="err" id="password_err"></div>
             </div>
         </div>
-        <p>Would you like us to remember you next time?</p>
         <div class="row">
             <div class="checkbox">
                 <input type="checkbox" name="rememberme" value="true" class="hidden" />

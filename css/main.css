@@ -122,10 +122,17 @@ nav {
     line-height: 10px;
     padding: 14px 10px;
     cursor: pointer;
-    width: 100px;
+    width: 35px;
     display: block;
     font-size: 14px;
     float: left;
+}
+.w285 {
+    width: 285px;
+}
+.ajaxform label .fa {
+    font-size: 16px;
+    line-height: 10px;
 }
 .ajaxform input[type="text"], 
 .ajaxform input[type="password"], 
@@ -148,8 +155,8 @@ nav {
     cursor: pointer;
     color: #79C7CB;
     float: left;
-    padding-left: 80px;
-    width: 100px;
+    padding-left: 10px;
+    width: 35px;
     line-height: 19px;
 }
 .arrow-right {
