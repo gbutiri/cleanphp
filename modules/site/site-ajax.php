@@ -288,6 +288,10 @@ function process_login () {
             setcookie('site_user_token', $_SESSION['site_user_token'],(10*365*24*60*60),'/') ;
         }
         
+        $sql_t = "UPDATE signup SET salt = ?, token = ? WHERE username LIKE ?";
+        sqlRun($sql_t,'sss',array($salt, $token, $username));
+        
+        
         // exit(0);
         echo json_encode(array(
             'closevbox' => true,
@@ -298,6 +302,9 @@ function process_login () {
 
 function logout() {
     session_destroy();
+    setcookie('site_user_username', '', -1000, '/');
+    setcookie('site_user_salt', '', -1000, '/');
+    setcookie('site_user_token', '', -1000, '/');
     echo json_encode(array(
         'redirect' => '/'
     ));
