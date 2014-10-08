@@ -30,6 +30,7 @@
 			<li><a class="tmbtn" data-action="show_register" data-loadmsg="Loading Registration Form" href="#">Register</a></li>
             <?php } else { ?>
 			<li><a class="tmbtn" data-action="logout" href="#">Logout</a></li>
+			<li><a href="/<?php echo _USERNAME; ?>">My Profile</a></li>
             <?php } ?>
 			<div class="clearfix"></div>
 		</ul>

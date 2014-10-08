@@ -4,6 +4,13 @@ body, html, textarea {
 	margin: 0;
 	padding: 0;
 }
+html {
+    height: 100%;
+    background-color: #ebebec;
+    background-image: -webkit-radial-gradient(center, #ebebec, #b4b4b4);
+    background-image: -moz-radial-gradient(center, #ebebec, #b4b4b4);
+    background-image: radial-gradient(center, #ebebec, #b4b4b4);
+}
 ul, ol {
 	margin: 0;
 	padding: 0;
