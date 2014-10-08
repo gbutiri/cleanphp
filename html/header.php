@@ -25,7 +25,7 @@
 			<li><a href="/about">About</a></li>
 			<li><a href="/tools/home">New Home Module</a></li>
 			<li><a class="tmbtn" data-action="show_login" href="#">Login</a></li>
-			<li><a class="tmbtn" data-action="show_register" href="#">Register</a></li>
+			<li><a class="tmbtn" data-action="show_register" data-loadmsg="Loading Registration Form" href="#">Register</a></li>
 			<div class="clearfix"></div>
 		</ul>
 	</nav>

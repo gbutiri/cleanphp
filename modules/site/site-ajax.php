@@ -23,7 +23,6 @@ function sample_function() {
 }
 
 function install() {
-    global $dbi;
     include(_DOCROOT.'/inc/sql-core.php');
     include(_DOCROOT.'/html/pre-header.php');
     
@@ -122,17 +121,88 @@ function show_register () {
 	));
 }
 function process_registration () {
-    // check value fields.
-    // create user folder.
-    // create salt / tokens.
-    // insert into database.
-    // send out email.
-    // display success message (check email, enter verification code).
+    include(_DOCROOT.'/inc/sql-core.php');
+    include(_DOCROOT.'/html/pre-header.php');
+	include(_DOCROOT.'/inc/functions.class.php');
+    $fn = new Functions();
     
-	echo json_encode(array(
-        'closevbox' => true,
-        'redirect' => '/gbutiri'
-	));
+    $err = false;
+    
+    // 1. check value fields.
+    $email_check = $fn->checkEmail($_POST['email']);
+    if ($email_check === false) {
+        $err = true;
+        $htmls['#email_err'] = 'Invalid format. Use something similar to username@domain.com';
+    }
+    
+    $un_check = $fn->checkUsername($_POST['username']);
+    if ($un_check != "") {
+        $err = true;
+        $htmls['#username_err'] = $un_check;
+    }
+    
+    $pw_check = $fn->checkUsername($_POST['password']);
+    if ($pw_check != "") {
+        $err = true;
+        $htmls['#password_err'] = $pw_check;
+    }
+    
+    // 2. create user folder.
+    
+    
+    // 3. create salt / tokens.
+    $salt = md5($_POST['username'].time());
+    $token = md5($_POST['email'].$salt);
+    
+    // 4. insert into database.
+    $sql_u = "INSERT INTO signup (
+            email,
+            username,
+            `password`,
+            token,
+            salt,
+            fname,
+            lname,
+            bday,
+            created,
+            lastloggedin
+        ) VALUES (
+            ?,?,?,?,?,?,?,?,?,?
+        )";
+    sqlRun($sql_u,'ssssssssii',array(
+        trim($_POST['email']),
+        trim($_POST['username']),
+        md5(trim($_POST['password'])),
+        $token,
+        $salt,
+        "",
+        "",
+        "",
+        time(),
+        time()
+    ));
+    
+    // 5. send out email.
+    $to      = trim($_POST['email']);
+    $subject = "Your Website Registration";
+    $message = "Click this link to validate your email. Or, copy / paste this code";
+    $headers = 'From: webmaster@mypersonalwebsite.com' . "\r\n" .
+        'Reply-To: webmaster@mypersonalwebsite.com' . "\r\n" .
+        'X-Mailer: PHP/' . phpversion();
+    //mail($to, $subject, $message, $headers);
+    
+    if ($err) {
+        echo json_encode(array(
+            'htmls' => $htmls,
+        ));
+    } else {
+        // 6. display success message (check email or check email and enter verification code).
+        
+        echo json_encode(array(
+            'closevbox' => true,
+            'redirect' => '/gbutiri'
+        ));
+    }
 }
 
 function show_login () {

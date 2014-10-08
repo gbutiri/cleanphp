@@ -59,6 +59,20 @@ a {
     background-color: transparent;
     text-align: center;
 }
+.loading-circle-message-wrapper {
+    position: absolute;
+    top: 50%;
+    margin-top: 80px;
+    text-align: center;
+    left: 0;
+    right: 0;
+}
+.loading-circle-message {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    padding: 20px;
+}
 #loading-circle .fa {
     height: 80px;
     width: 80px;
@@ -69,7 +83,7 @@ a {
     background: #000;
     color: #fff;
     padding: 15px;
-    margin-left: -15px;
+    margin-left: -55px;
     border-radius: 100%;
 }
 

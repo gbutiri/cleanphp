@@ -19,13 +19,17 @@ function postAjax(d) {
 }
 
 $(document).on('doAjaxController',function(e,$this) {
-    $('body').append('<div id="loading-circle"><i class="fa fa-spinner fa-spin"></i></div>');
     var _data = '';
     var _action = 'bad_call';
     var _module = 'site';
     if (typeof($this.attr('data-data')) !== 'undefined') {_data = $this.attr('data-data');}
     if (typeof($this.attr('data-action')) !== 'undefined') {_action = $this.attr('data-action');}
     if (typeof($this.attr('data-module')) !== 'undefined') {_module = $this.attr('data-module');}
+    
+    // loading circle
+    $('body').append('<div id="loading-circle"><i class="fa fa-spinner fa-spin"></i><div class="loading-circle-message-wrapper"><div class="loading-circle-message">Loading...</div></div></div>');
+    if (typeof($this.attr('data-loadmsg')) !== 'undefined') {_loadmsg = $this.attr('data-loadmsg');}else{_loadmsg = 'Processing ...';}
+    $(document).find('#loading-circle').find('.loading-circle-message').html(_loadmsg);
     
     if ($this.hasClass('ajaxform')) {
         _data = $this.serialize();

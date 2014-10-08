@@ -14,7 +14,7 @@ function renderSampleContent() {
 
 function renderRegisterForm() {
     ?>
-    <form class="ajaxform" data-action="process_registration">
+    <form class="ajaxform" data-action="process_registration" data-loadmsg="Signing you up... Please wait.">
         <h3>Register</h3>
         <div class="row">
             <div class="field-wrapper">
@@ -37,17 +37,9 @@ function renderRegisterForm() {
                 <div class="err" id="password_err"></div>
             </div>
         </div>
-        <p>Would you like us to remember you next time?</p>
-        <div class="row">
-            <div class="checkbox">
-                <input type="checkbox" name="rememberme" value="true" class="hidden" />
-                <i class="fa checkme fa-square-o" data-name="rememberme"></i>
-                <label>Remember me!</label>
-            </div>
-        </div>
         <div class="row">
             <div class="">
-                <input type="submit" value="Do Action" />
+                <input type="submit" value="Register" />
             </div>
         </div>
     </form>

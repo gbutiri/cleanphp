@@ -106,7 +106,7 @@ Class Functions {
 		elseif( strlen($username) > 20 ) {$error = "Username too long. Must be no longer than 20 characters.";}
 		elseif( !preg_match("#[0-9a-zA-Z_\-]+#", $username) ) {$error = "Username can only include letters, numbers, dash ( - ), and underscore ( _ )!";}
 		elseif( preg_match("#\W+#", $username) && !preg_match("#[-]+#", $username) ) {$error = "Username can only include letters, numbers, and underscore ( _ )!";}
-		if($error!=""){
+		if($error != ""){
 			return $error;
 		} else {
 			return "";
