@@ -121,6 +121,8 @@ function show_register () {
 	));
 }
 function process_registration () {
+    // used for testing
+    //sleep(1);
     include(_DOCROOT.'/inc/sql-core.php');
     include(_DOCROOT.'/html/pre-header.php');
 	include(_DOCROOT.'/inc/functions.class.php');

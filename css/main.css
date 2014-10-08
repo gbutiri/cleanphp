@@ -58,7 +58,36 @@ a {
     bottom: 0;
     background-color: transparent;
     text-align: center;
+    display: block;
+    opacity: 1;
+    /*
+    transition: opacity: .1s;
+    -moz-transition: opacity: .1s;
+    -webkit-transition: opacity: .1s;
+    animation: fadeup 0.2s;
+    -webkit-animation: fadeup 0.2s;
+    -moz-animation: fadeup 0.2s;
+    -o-animation: fadeup 0.2s;
+    */
 }
+/*
+@keyframes fadeup {
+    0% {opcaity: 0;}
+    100% {opcaity: 1;}
+}
+@-webkit-keyframes fadeup {
+    0% {opcaity: 0;}
+    100% {opcaity: 1;}
+}
+@-moz-keyframes fadeup {
+    0% {opcaity: 0;}
+    100% {opcaity: 1;}
+}
+@-o-keyframes fadeup {
+    0% {opcaity: 0;}
+    100% {opcaity: 1;}
+}
+*/
 .loading-circle-message-wrapper {
     position: absolute;
     top: 50%;
@@ -71,20 +100,23 @@ a {
     display: inline-block;
     background: #000;
     color: #fff;
-    padding: 20px;
+    padding: 5px;
+    box-shadow: 0 0 50px #000;
+    border-radius: 10px;
 }
 #loading-circle .fa {
-    height: 80px;
-    width: 80px;
+    height: 40px;
+    width: 40px;
     top: 50%;
-    margin-top: -55px;
+    margin-top: -25px;
     position: absolute;
-    font-size: 80px;
+    font-size: 40px;
     background: #000;
     color: #fff;
-    padding: 15px;
-    margin-left: -55px;
+    padding: 5px;
+    margin-left: -25px;
     border-radius: 100%;
+    box-shadow: 0 0 50px #000;
 }
 
 
