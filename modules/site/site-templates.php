@@ -82,33 +82,33 @@ function renderLoginForm() {
 
 function renderSampleForm() {
     ?>
-    <form class="ajaxform" data-action="submit_sample_form">
+    <form class="ajaxform w285" data-action="submit_sample_form">
         <h3>Form Header</h3>
         <p>This is the content that will appear while trying to ajax it in.</p>
         <div class="row">
             <div class="field-wrapper">
-                <label class="arrow-right">Username</label>
+                <label class="arrow-right"><i class="fa fa-user"></i></label>
                 <input type="text" placeholder="text field sample" name="textfield" />
                 <div class="err" id="username_err"></div>
             </div>
         </div>
         <div class="row">
             <div class="field-wrapper">
-                <label class="arrow-right">Password</label>
+                <label class="arrow-right"><i class="fa fa-lock"></i></label>
                 <input type="password" placeholder="password" name="password" />
                 <div class="err" id="password_err"></div>
             </div>
         </div>
         <div class="row">
             <div class="field-wrapper">
-                <label class="arrow-right">Description</label>
+                <label class="arrow-right"><i class="fa fa-file-text"></i></label>
                 <textarea placeholder="description" name="description"></textarea>
                 <div class="err" id="description_err"></div>
             </div>
         </div>
         <div class="row">
             <div class="field-wrapper">
-                <label class="arrow-right">Select One</label>
+                <label class="arrow-right"><i class="fa fa-list"></i></label>
                 <select name="selectone">
                     <option value=""> - Make your selection - </option>
                     <option value="1">Clear</option>
