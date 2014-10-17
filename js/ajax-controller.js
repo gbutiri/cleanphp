@@ -82,10 +82,10 @@ $(document).on('doAjaxController',function(e,$this) {
 }).on('submit','.ajaxform',function (e) {
     e.preventDefault();
     $(document).trigger('doAjaxController',[$(this)]);
-}).on('focus','.autoheight',function(e) {
+}).on('focus','.autosave',function(e) {
     var $this = $(this);
     _autosave_value = $this.html();
-}).on('blur','.autoheight',function (e) {
+}).on('blur','.autosave',function (e) {
     e.preventDefault();
     $(document).trigger('doAjaxController',[$(this)]);
 });
