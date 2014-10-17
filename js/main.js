@@ -1,3 +1,4 @@
+var _autosave_value = '';
 $(document).on('click','.checkme',function(e) {
     // form controls
     $this = $(this);

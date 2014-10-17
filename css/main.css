@@ -261,3 +261,51 @@ form input[type="submit"]:hover {
 form input[type="submit"]:active {
     background-color: #79C7CB;
 }
+
+.autoheight {
+    min-height: 16px;
+    font-size: 16px;
+    margin: 0;
+    padding: 10px;
+    font-family: Arial;
+    line-height: 16px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    overflow: hidden;
+    resize: none;
+    border-top: 1px solid #aaa;
+    outline: none;
+    min-width: 200px;
+    background: #ddd;
+    max-height: 200px;
+    overflow: auto;
+}
+.autoheight * {
+    line-height: 16px;
+    font-size: 16px;
+}
+.autosave {
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+}
+.autosave.saving {
+    background: #ff9;
+}
+.autosave.saved {
+    background: #9f9;
+}
+.autosave.error {
+    background: #f99;
+}
+.autosave:hover {
+    background: #eee;
+}
+.autosave:focus {
+    background: #fff;
+}
+[contenteditable=true]:empty:before{
+    content:attr(placeholder);
+    color: #999;
+}
