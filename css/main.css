@@ -305,7 +305,7 @@ form input[type="submit"]:active {
 .autosave:focus {
     background: #fff;
 }
-[contenteditable=true]:empty:not(:focus):before{
+[contenteditable=true]:empty:before{
     content:attr(placeholder);
     color: #999;
 }
