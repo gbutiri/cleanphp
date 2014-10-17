@@ -11,10 +11,10 @@ function postAjax(d) {
 	for(el in d.attrchanges) {for (value in d.attrchanges[el]) {$(el).prop(value,d.attrchanges[el][value]);}}
 	for(el in d.classRemoves) {$(el).removeClass(d.classRemoves[el]);}
 	for(el in d.classAdds) {$(el).addClass(d.classAdds[el]);}
+    for(el in d.csselems) {$(el).css(d.csselems[el][0], d.csselems[el][1]);};
 	if (typeof(d.closevbox) !== 'undefined') {$.fn.vbox('close');}
 	if (typeof(d.js) !== 'undefined') {try { eval(d.js);} catch(e) {}}
 	if (typeof(d.redirect) !== 'undefined') {if (d.redirect != '') {window.location.href = d.redirect;}}
-	try {eval($action)(d);} catch(e) {};
 }
 
 $(document).on('doAjaxController',function(e,$this) {

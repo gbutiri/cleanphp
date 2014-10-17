@@ -316,4 +316,10 @@ function bad_call() {
 		'message' => 'no function specified'
 	));
 }
+
+function save_large_textarea() {
+    echo json_encode(array(
+        'saved' => true
+    ));
+}
 ?>
