@@ -41,7 +41,7 @@ $(document).on('doAjaxController',function(e,$this) {
     } else if ($this.hasClass('autosave')) {
         // if it's an autosave field...
         $this.addClass('saving');
-        if ($this.html() != _autosave_value || $this.hasClass('error')) {
+        if ($this.html() !== _autosave_value || $this.hasClass('error')) {
         } else {
             $this.removeClass('saving');
             _do_ajax = false;
@@ -74,7 +74,7 @@ $(document).on('doAjaxController',function(e,$this) {
             }
         });
     } else {
-                $('#loading-circle').remove();
+        $('#loading-circle').remove();
     }
 }).on('click','.tmbtn',function (e) {
     e.preventDefault();
