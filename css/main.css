@@ -281,27 +281,31 @@ form input[type="submit"]:active {
     max-height: 200px;
     overflow: auto;
 }
-.autoheight {
-    -webkit-transition: all 1s;
-    -moz-transition: all 1s;
-    transition: all 1s;
-}
-.autoheight.saving {
-    background: #ff9;
-}
-.autoheight.saved {
-    background: #9f9;
-}
-.autoheight.error {
-    background: #f99;
-}
 .autoheight * {
     line-height: 16px;
     font-size: 16px;
 }
-.autoheight:hover {
+.autosave {
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+}
+.autosave.saving {
+    background: #ff9;
+}
+.autosave.saved {
+    background: #9f9;
+}
+.autosave.error {
+    background: #f99;
+}
+.autosave:hover {
     background: #eee;
 }
-.autoheight:focus {
+.autosave:focus {
     background: #fff;
+}
+[contenteditable=true]:empty:not(:focus):before{
+    content:attr(placeholder);
+    color: #999;
 }
