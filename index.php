@@ -11,6 +11,9 @@ include(_DOCROOT.'/html/header.php'); /* page header <head> <html> */
 <div>&nbsp;</div>
 <a href="#" class="tmbtn" data-action="sample_function">Add some dynamic content in the box below</a>
 <div>&nbsp;</div>
+<a href="#" class="tmbtn" data-action="sample_function_split">Add some dynamic content in the box below split # and .</a>
+<p id="stuff-coming-back-split">The Value: <span class="value"></span></p>
+<div>&nbsp;</div>
 <a href="#" class="tmbtn isvbox" data-action="show_form_sample">Open Form</a>
 <div>&nbsp;</div>
 <h2>These are things</h2>

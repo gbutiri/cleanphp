@@ -22,6 +22,20 @@ function sample_function() {
 	));
 }
 
+function sample_function_split() {
+    
+    // will need to render something from templates
+	$dataBack = "Split Data";
+    
+	echo json_encode(array(
+		'success' => true,
+		'message' => 'Action one',
+        'htmls' => array(
+            '#stuff-coming-back-split .value' => $dataBack,
+        ),
+	));
+}
+
 function install() {
     include(_DOCROOT.'/inc/sql-core.php');
     include(_DOCROOT.'/html/pre-header.php');
