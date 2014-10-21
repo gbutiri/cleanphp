@@ -1,7 +1,18 @@
 var _autosave_value = '';
 
+function el_split(el) {
+    if (el.indexOf(" ") !== -1) {
+        _split = el.split(" ");
+        _first = _split[0];
+        _rest = _split.slice(1).join(" ");
+        return $(_first).find(_rest);
+    } else {
+        return $(el);
+    }
+}
+
 function postAjax(d) {
-	for(el in d.htmls) {$(el).html(d.htmls[el]);}
+	for(el in d.htmls) {el_split(el).html(d.htmls[el]);}
 	for(el in d.appends) {$(el).append(d.appends[el]);}
 	for(el in d.prepends) {$(el).prepend(d.prepends[el]);}
 	for(el in d.appendsto) {$(el).appendTo(d.appendsto[el]);}
