@@ -13,18 +13,17 @@ function el_split(el) {
 
 function postAjax(d) {
 	for(el in d.htmls) {el_split(el).html(d.htmls[el]);}
-	for(el in d.appends) {$(el).append(d.appends[el]);}
-	for(el in d.prepends) {$(el).prepend(d.prepends[el]);}
-	for(el in d.appendsto) {$(el).appendTo(d.appendsto[el]);}
-	for(el in d.updatables) {$(el).html(d.updatables[el]);}
-	for(el in d.replaceables) {$(el).replaceWith(d.replaceables[el]);}
+	for(el in d.appends) {el_split(el).append(d.appends[el]);}
+	for(el in d.prepends) {el_split(el).prepend(d.prepends[el]);}
+    for(el in d.appendsto) {el_split(el).appendTo(d.appendsto[el]);}
+	for(el in d.replaceables) {el_split(el).replaceWith(d.replaceables[el]);}
 	for(el in d.removes) {$(document).find(d.removes[el]).remove();}
-	for(el in d.afters) {$(el).after(d.afters[el]);}
-	for(el in d.attrremoves) {$(el).removeAttr(d.attrremoves[el]);}
+	for(el in d.afters) {el_split(el).after(d.afters[el]);}
+	for(el in d.attrremoves) {el_split(el).removeAttr(d.attrremoves[el]);}
 	for(el in d.attrchanges) {for (value in d.attrchanges[el]) {$(el).prop(value,d.attrchanges[el][value]);}}
-	for(el in d.classRemoves) {$(el).removeClass(d.classRemoves[el]);}
-	for(el in d.classAdds) {$(el).addClass(d.classAdds[el]);}
-    for(el in d.csselems) {$(el).css(d.csselems[el][0], d.csselems[el][1]);};
+	for(el in d.classRemoves) {el_split(el).removeClass(d.classRemoves[el]);}
+	for(el in d.classAdds) {el_split(el).addClass(d.classAdds[el]);}
+    for(el in d.csselems) {el_split(el).css(d.csselems[el][0], d.csselems[el][1]);};
 	if (typeof(d.closevbox) !== 'undefined') {$.fn.vbox('close');}
 	if (typeof(d.js) !== 'undefined') {try { eval(d.js);} catch(e) {}}
 	if (typeof(d.redirect) !== 'undefined') {if (d.redirect != '') {window.location.href = d.redirect;}}

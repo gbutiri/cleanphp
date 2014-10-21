@@ -23,15 +23,45 @@ function sample_function() {
 }
 
 function sample_function_split() {
-    
-    // will need to render something from templates
 	$dataBack = "Split Data";
-    
 	echo json_encode(array(
-		'success' => true,
-		'message' => 'Action one',
         'htmls' => array(
             '#stuff-coming-back-split .value' => $dataBack,
+        ),
+	));
+}
+
+function sample_function_append() {
+	$dataBack = " Appended Data";
+	echo json_encode(array(
+        'appends' => array(
+            '#stuff-coming-back-append .value' => $dataBack,
+        ),
+	));
+}
+
+function sample_function_prepend() {
+	$dataBack = "Prepend me Data ";
+	echo json_encode(array(
+        'prepends' => array(
+            '#stuff-coming-back-prepend .value' => $dataBack,
+        ),
+	));
+}
+
+function sample_function_appendto() {
+	echo json_encode(array(
+        'appendsto' => array(
+            '#stuff-coming-back-appendthis .value' => '#stuff-coming-back-appendto',
+        ),
+	));
+}
+
+function sample_function_replaceable() {
+	$dataBack = '<div class="solid"> Rplaceables me Data</div>';
+	echo json_encode(array(
+        'replaceables' => array(
+            '#stuff-coming-back-replaceable .value' => $dataBack,
         ),
 	));
 }
