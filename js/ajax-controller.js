@@ -1,5 +1,7 @@
 var _autosave_value = '';
 
+// function added to make jquery selects faster. (2.5x faster)
+// #element find .class is much faster.
 function el_split(el) {
     if (el.indexOf(" ") !== -1) {
         _split = el.split(" ");
