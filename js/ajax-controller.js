@@ -52,6 +52,7 @@ $(document).on('doAjaxController',function(e,$this) {
         $this.find('.err').html('');
     } else if ($this.hasClass('autosave')) {
         // if it's an autosave field...
+        _data = $this.attr('name') + '=' + $this.text();
         $this.addClass('saving');
         if ($this.html() !== _autosave_value || $this.hasClass('error')) {
         } else {
@@ -77,8 +78,10 @@ $(document).on('doAjaxController',function(e,$this) {
                     if (!data.error) {
                         $this.removeClass('saving error').addClass('saved');
                         var k = setTimeout(function () {$this.removeClass('saved error')},500);
+                         $this.parent().find('.err').html('');
                     } else {
                         $this.removeClass('saving').addClass('error');
+                        $this.parent().find('.err').html(data.error);
                     }
                 } else {
                     postAjax(data);

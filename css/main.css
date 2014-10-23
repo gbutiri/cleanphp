@@ -299,6 +299,16 @@ form input[type="submit"]:active {
 .autosave.error {
     background: #f99;
 }
+.autofield {
+    margin-bottom: 10px;
+}
+.autofield .small {
+    font-size: 10px;
+}
+.autofield .err {
+    color: #a33;
+    height: 11px;
+}
 .autosave:hover {
     background: #eee;
 }

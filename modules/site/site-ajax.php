@@ -360,6 +360,20 @@ function save_large_textarea() {
     ));
 }
 
+function save_large_textarea2() {
+    
+    if (is_numeric($_POST['text_two'])) {
+        echo json_encode(array(
+            'saved' => true
+        ));
+    } else {
+        
+        echo json_encode(array(
+            'error' => 'This value needs to be numeric.'
+        ));
+    }
+}
+
 function bad_call() {
 	echo json_encode(array(
 		'success' => false,
