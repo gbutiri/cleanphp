@@ -354,16 +354,16 @@ function logout() {
     ));
 }
 
+function save_large_textarea() {
+    echo json_encode(array(
+        'saved' => true
+    ));
+}
+
 function bad_call() {
 	echo json_encode(array(
 		'success' => false,
 		'message' => 'no function specified'
 	));
-}
-
-function save_large_textarea() {
-    echo json_encode(array(
-        'saved' => true
-    ));
 }
 ?>
