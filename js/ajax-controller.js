@@ -86,7 +86,12 @@ $(document).on('doAjaxController',function(e,$this) {
                 } else {
                     postAjax(data);
                 }
+            }/*,
+            error: function () {
+                // remove the loading circle during an error;
+                $('#loading-circle').remove();
             }
+            */
         });
     } else {
         $('#loading-circle').remove();
