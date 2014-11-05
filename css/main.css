@@ -291,13 +291,13 @@ form input[type="submit"]:active {
     transition: all .2s;
 }
 .autosave.saving {
-    background: #ff9;
+    background: #ff9 !important;
 }
 .autosave.saved {
-    background: #9f9;
+    background: #9f9 !important;
 }
 .autosave.error {
-    background: #f99;
+    background: #f99 !important;
 }
 .autofield {
     margin-bottom: 10px;
