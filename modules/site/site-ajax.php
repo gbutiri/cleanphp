@@ -102,7 +102,7 @@ function install() {
     );";
     
     sqlRun($sql,'',array());
-    unlink(_DOCROOT.'/install.php');
+    //unlink(_DOCROOT.'/install.php');
     
 	echo json_encode(array(
         'message' => 'good',
