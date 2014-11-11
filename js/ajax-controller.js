@@ -13,6 +13,21 @@ function el_split(el) {
     }
 }
 
+function do_toggle(d) {
+    switch (d._toggle_type) {
+        case "toggle":
+            d.$parent.find('.trigger').toggleClass('hidden');
+            break;
+        case "dropdown":
+            d.$parent.find('.target').toggleClass('hidden');
+            break;
+        case "dropdown-toggle":
+            d.$parent.find('.trigger').toggleClass('hidden');
+            d.$parent.find('.target').toggleClass('hidden');
+            break;
+    }
+}
+
 function postAjax(d) {
 	for(el in d.htmls) {el_split(el).html(d.htmls[el]);}
 	for(el in d.appends) {el_split(el).append(d.appends[el]);}
@@ -29,6 +44,7 @@ function postAjax(d) {
 	if (typeof(d.closevbox) !== 'undefined') {$.fn.vbox('close');}
 	if (typeof(d.js) !== 'undefined') {try { eval(d.js);} catch(e) {}}
 	if (typeof(d.redirect) !== 'undefined') {if (d.redirect != '') {window.location.href = d.redirect;}}
+    do_toggle(d);
 }
 
 $(document).on('doAjaxController',function(e,$this) {
@@ -36,11 +52,15 @@ $(document).on('doAjaxController',function(e,$this) {
     var _action = 'bad_call';
     var _module = 'site';
     var _do_ajax = true;
+    var _toggle_type = '';
+    
+    var $parent = $this.parent();
     
     if (typeof($this.attr('data-data')) !== 'undefined') {_data = $this.attr('data-data');}
     if (typeof($this.attr('data-action')) !== 'undefined') {_action = $this.attr('data-action');}
     if (typeof($this.attr('data-module')) !== 'undefined') {_module = $this.attr('data-module');}
-    
+    if (typeof($parent.attr('data-trigger')) !== 'undefined') {_toggle_type = $parent.attr('data-trigger');}
+
     // loading circle
     $('body').append('<div id="loading-circle"><i class="fa fa-spinner fa-spin"></i><div class="loading-circle-message-wrapper"><div class="loading-circle-message">Loading...</div></div></div>');
     if (typeof($this.attr('data-loadmsg')) !== 'undefined') {_loadmsg = $this.attr('data-loadmsg');}else{_loadmsg = 'Processing ...';}
@@ -84,6 +104,8 @@ $(document).on('doAjaxController',function(e,$this) {
                         $this.parent().find('.err').html(data.error);
                     }
                 } else {
+                    data._toggle_type = _toggle_type;
+                    data.$parent = $parent;
                     postAjax(data);
                 }
             }/*,

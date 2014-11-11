@@ -374,6 +374,11 @@ function save_large_textarea2() {
     }
 }
 
+function test_toggle() {
+    sleep(1);
+    echo json_encode(array('testing' => 123));
+}
+
 function bad_call() {
 	echo json_encode(array(
 		'success' => false,
