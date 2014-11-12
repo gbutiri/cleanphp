@@ -375,7 +375,7 @@ function save_large_textarea2() {
 }
 
 function test_toggle() {
-    sleep(1);
+    // sleep(1);
     echo json_encode(array('testing' => 123));
 }
 

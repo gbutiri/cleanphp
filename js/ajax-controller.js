@@ -83,6 +83,7 @@ $(document).on('doAjaxController',function(e,$this) {
         // Just an AJAX post. Get the data from data-data attribute
         _data = $this.attr('data-data') ? $this.attr('data-data') : '';
     };
+    
 
     if (_do_ajax) {
         $.ajax({
@@ -130,4 +131,14 @@ $(document).on('doAjaxController',function(e,$this) {
 }).on('blur','.autosave',function (e) {
     e.preventDefault();
     $(document).trigger('doAjaxController',[$(this)]);
+}).on('click',function(e){
+    // close all toggles.
+    $target = $(e.target);
+    $wrapper = $target.parents('.trigger-wrapper');
+    console.log($wrapper);
+    
+    $('.trigger-wrapper.reset').not($wrapper).find('.trigger, .target').removeClass('hidden');
+    $('.trigger-wrapper.reset').not($wrapper).find('.init-hidden').addClass('hidden');
+}).on('click','.trigger-wrapper .target',function(e){
+    e.stopPropagation();
 });

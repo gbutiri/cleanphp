@@ -10,26 +10,26 @@
         <a href="" class="tmbtn trigger" data-action="test_toggle"><i class="fa fa-toggle-off"></i> Inactive</a>
     </span>
 
-    <div class="trigger-wrapper" data-trigger="dropdown">
+    <div class="trigger-wrapper reset" data-trigger="dropdown">
         <a href="" class="tmbtn trigger" data-action="test_toggle"><i class="fa fa-ellipsis-h"></i></a>
-        <div class="target hidden">
+        <div class="target hidden init-hidden">
             [Content]
         </div>
     </div>
 
 
-    <div class="trigger-wrapper" data-trigger="dropdown-toggle">
-        <a href="" class="tmbtn trigger hidden" data-action="test_toggle"><i class="fa fa-chevron-up"></i> Show Less </a>
+    <div class="trigger-wrapper reset" data-trigger="dropdown-toggle">
+        <a href="" class="tmbtn trigger hidden init-hidden" data-action="test_toggle"><i class="fa fa-chevron-up"></i> Show Less </a>
         <a href="" class="tmbtn trigger" data-action="test_toggle"><i class="fa fa-chevron-down"></i> Show More </a>
-        <div class="target hidden">
+        <div class="target hidden init-hidden">
             [Content]
         </div>
     </div>
 
-    <div class="trigger-wrapper" data-trigger="dropdown-toggle">
-        <a href="" class="tmbtn trigger hidden" data-action="test_toggle"><i class="fa fa-minus"></i> Show Less </a>
+    <div class="trigger-wrapper reset" data-trigger="dropdown-toggle">
+        <a href="" class="tmbtn trigger hidden init-hidden" data-action="test_toggle"><i class="fa fa-minus"></i> Show Less </a>
         <a href="" class="tmbtn trigger" data-action="test_toggle"><i class="fa fa-plus"></i> Show More </a>
-        <div class="target hidden">
+        <div class="target hidden init-hidden">
             [Content]
         </div>
     </div>
